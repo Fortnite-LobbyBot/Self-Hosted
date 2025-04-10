@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import FNLB from 'fnlb';
 
 const fnlb = new FNLB({ clusterName: 'FNLB Self Hosted' });
