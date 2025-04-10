@@ -1,5 +1,8 @@
 import 'dotenv/config';
 import FNLB from 'fnlb';
+import http from 'http';
+
+http.createServer((req, res) => res.end('OK')).listen(8080);
 
 const fnlb = new FNLB({
 	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
