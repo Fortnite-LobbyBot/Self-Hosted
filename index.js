@@ -2,7 +2,7 @@ import 'dotenv/config';
 import FNLB from 'fnlb';
 import http from 'http';
 
-http.createServer((req, res) => res.end('OK')).listen(8080);
+http.createServer((req, res) => res.end('OK')).listen(isNaN(parseInt(process.env.HTTP_PORT)) ? 8080 : parseInt(process.env.HTTP_PORT));
 
 const fnlb = new FNLB({
 	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
