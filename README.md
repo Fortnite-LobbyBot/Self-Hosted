@@ -1,5 +1,7 @@
 ﻿# FNLB Self-Hosted Deployment Guide
 
+> 💡 **This branch** includes a minimal **HTTP server** which may be convenient for some free hostings.
+
 Easily self-host your own **FNLB** cluster using this minimal setup. FNLB is a powerful and scalable system for managing Fortnite bots at scale.
 
 ---
@@ -105,6 +107,7 @@ Below is a breakdown of each environment variable used in the setup:
 | `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`                  |
 | `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`                |
 | `CLUSTER_NAME`      | The name of the cluster that will appear in the app                         | `Self Hosted Cluster` |
+| `HTTP_PORT`         | HTTP Port to listen to                                                      | `8080` |
 
 ---
 
