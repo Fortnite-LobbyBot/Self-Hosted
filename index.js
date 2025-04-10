@@ -30,5 +30,5 @@ setInterval(
 	restartFNLB,
 	isNaN(parseInt(process.env.RESTART_INTERVAL))
 		? 3600000
-		: parseInt(process.env.RESTART_INTERVAL / 1000)
+		: parseInt(process.env.RESTART_INTERVAL * 1000)
 );
