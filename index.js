@@ -1,7 +1,9 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import FNLB from 'fnlb';
 
-const fnlb = new FNLB({ clusterName: 'FNLB Self Hosted' });
+const fnlb = new FNLB({
+	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
+});
 
 async function startFNLB() {
 	await fnlb.start({

@@ -65,6 +65,7 @@ CATEGORIES=12345678,98765432
 NUMBER_OF_SHARDS=2
 BOTS_PER_SHARD=32
 RESTART_INTERVAL=3600
+CLUSTER_NAME=Self Hosted Cluster
 ```
 
 > 💡 **API Token:** Obtain this from your [FNLB Account](https://app.fnlb.net/account) under “API Tokens”.  
@@ -96,13 +97,14 @@ The cluster will initialize using your configuration and automatically restart o
 
 Below is a breakdown of each environment variable used in the setup:
 
-| Variable            | Description                                                                 | Default  |
-|---------------------|-----------------------------------------------------------------------------|----------|
-| `API_TOKEN`         | Your personal FNLB API token                                                | *Required* |
-| `CATEGORIES`        | Comma-separated list of bot category IDs                                    | *Required* |
-| `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`      |
-| `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`     |
-| `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`   |
+| Variable            | Description                                                                 | Default               |
+|---------------------|-----------------------------------------------------------------------------|-----------------------|
+| `API_TOKEN`         | Your personal FNLB API token                                                | *Required*            |
+| `CATEGORIES`        | Comma-separated list of bot category IDs                                    | *Required*            |
+| `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`                   |
+| `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`                  |
+| `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`                |
+| `CLUSTER_NAME`      | The name of the cluster that will appear in the app                         | `Self Hosted Cluster` |
 
 ---
 
@@ -118,17 +120,19 @@ Ensure you're always using the latest and most stable version of FNLB:
 
 2. **Update dependencies**:
 
+- With **Node.js**:
+
    ```bash
    npm update fnlb
    ```
 
-3. **If using Bun**, reinstall dependencies:
+- With **Bun**:
 
    ```bash
-   bun install
+   bun update --latest
    ```
 
-4. **Restart the cluster** to apply changes:
+3. **Restart the cluster** to apply changes:
 
    ```bash
    npm start
@@ -140,7 +144,7 @@ Ensure you're always using the latest and most stable version of FNLB:
 
 ---
 
-## ⚙️ What the Script Does Behind the Scenes
+## ⚙️ What the Script Does
 
 Once started, the script performs the following:
 
@@ -150,13 +154,6 @@ Once started, the script performs the following:
   - Maximum **bots per shard**
   - Allowed **category IDs**
 - Implements automatic restarts for resilience, using the configured time interval
-
-Example of restart logic:
-
-```js
-// Restart interval logic (in milliseconds)
-setInterval(restartFNLB, RESTART_INTERVAL * 1000);
-```
 
 ---
 
