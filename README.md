@@ -1,32 +1,63 @@
-﻿# FNLB Self-Hosted
+﻿# FNLB Self-Hosted Deployment Guide
 
-Easily self-host your own **FNLB** (Fortnite Lobby Bot) cluster using this minimal setup. FNLB is a powerful and scalable system for managing Fortnite bots at scale.
+Easily self-host your own **FNLB** cluster using this minimal setup. FNLB is a powerful and scalable system for managing Fortnite bots at scale.
 
-## 🚀 Requirements
+---
 
-- **Node.js** v18 or newer
-- A valid [FNLB API Token](https://app.fnlb.net/account)
-- (Optional) [Bun](https://bun.sh) if you prefer Bun over Node.js
+## 🚀 Prerequisites
 
-## 📦 Installation
+Before you begin, make sure you have the following installed and ready:
 
-1. **Clone the project** or copy the provided files into your own setup.
+- **Node.js** (version 18 or newer) – [Download Node.js](https://nodejs.org/)
+- A valid **[FNLB API Token](https://app.fnlb.net/account)** – required to authenticate with FNLB services
+- *(Optional)* **[Bun](https://bun.sh)** – A fast JavaScript runtime that can be used as an alternative to Node.js
 
-2. **Install dependencies**:
+---
+
+## 📦 Installation Steps
+
+Follow these steps to get your FNLB cluster up and running:
+
+### 1. Clone the Repository
+
+Download or clone the FNLB self-hosting project to your local machine:
 
 ```bash
-npm install
+git clone https://github.com/Fortnite-LobbyBot/Self-Hosted.git
+cd Self-Hosted
 ```
 
-3. **Set up your environment variables**:
+> 💡 **Alternatively**, you can manually copy the files into a folder or download the source code as a ZIP.
 
-Rename the example file:
+---
+
+### 2. Install Dependencies
+
+Install required packages with your preferred runtime:
+
+- Using **Node.js**:
+
+  ```bash
+  npm install
+  ```
+
+- Using **Bun**:
+
+  ```bash
+  bun i
+  ```
+
+---
+
+### 3. Configure Environment Variables
+
+Rename the `.env.example` file to `.env`:
 
 ```bash
 cp .env.example .env
 ```
 
-Then edit `.env` with your values:
+Edit the `.env` file with your actual values:
 
 ```ini
 API_TOKEN=your_token_here
@@ -36,79 +67,101 @@ BOTS_PER_SHARD=32
 RESTART_INTERVAL=3600
 ```
 
-> 💡 You can find your category IDs at [FNLB Bots](https://app.fnlb.net/bots) → select your bot → “About this bot” → Category ID.
+> 💡 **API Token:** Obtain this from your [FNLB Account](https://app.fnlb.net/account) under “API Tokens”.  
+> 💡 **Category IDs:** Visit the [FNLB Bots Page](https://app.fnlb.net/bots), select a bot, and locate the **“Category ID”** in the **“About this bot”** section.
 
-## ▶️ Usage
+---
 
-### Start with Node.js
+## ▶️ Running the FNLB Cluster
 
-```bash
-npm start
-```
+Once configured, start your FNLB instance:
 
-### Start with Bun (optional)
+- With **Node.js**:
 
-```bash
-bun start:bun
-```
+  ```bash
+  npm start
+  ```
 
-This script will initialize the FNLB cluster with your configuration and automatically restart it periodically to ensure stability.
+- With **Bun**:
 
-## ⚙️ What This Script Does
+  ```bash
+  bun start:bun
+  ```
 
-- Initializes FNLB with your API token and configuration
-- Sets up:
-  - Custom number of shards
-  - Max bots per shard
-  - Allowed categories
-- Automatically **restarts the cluster** based on the configured interval
+The cluster will initialize using your configuration and automatically restart on the interval you defined, ensuring long-term stability and uptime.
+
+---
+
+## 🌐 Environment Variable Reference
+
+Below is a breakdown of each environment variable used in the setup:
+
+| Variable            | Description                                                                 | Default  |
+|---------------------|-----------------------------------------------------------------------------|----------|
+| `API_TOKEN`         | Your personal FNLB API token                                                | *Required* |
+| `CATEGORIES`        | Comma-separated list of bot category IDs                                    | *Required* |
+| `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`      |
+| `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`     |
+| `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`   |
+
+---
+
+## 🔄 Keeping FNLB Up to Date
+
+Ensure you're always using the latest and most stable version of FNLB:
+
+1. **Pull the latest changes** from the Git repository:
+
+   ```bash
+   git pull origin main
+   ```
+
+2. **Update dependencies**:
+
+   ```bash
+   npm update fnlb
+   ```
+
+3. **If using Bun**, reinstall dependencies:
+
+   ```bash
+   bun install
+   ```
+
+4. **Restart the cluster** to apply changes:
+
+   ```bash
+   npm start
+   # or
+   bun start:bun
+   ```
+
+> ✅ Regular updates provide access to new features, performance boosts, and essential bug fixes.
+
+---
+
+## ⚙️ What the Script Does Behind the Scenes
+
+Once started, the script performs the following:
+
+- Initializes FNLB using your API credentials and environment settings
+- Configures:
+  - Number of **shards** (isolated bot processes)
+  - Maximum **bots per shard**
+  - Allowed **category IDs**
+- Implements automatic restarts for resilience, using the configured time interval
+
+Example of restart logic:
 
 ```js
 // Restart interval logic (in milliseconds)
 setInterval(restartFNLB, RESTART_INTERVAL * 1000);
 ```
 
-## 🌐 Environment Variables
+---
 
-| Variable            | Description                                                                  | Default  |
-|---------------------|------------------------------------------------------------------------------|----------|
-| `API_TOKEN`         | Your personal FNLB API token                                                 | Required |
-| `CATEGORIES`        | Comma-separated list of category IDs                                         | Required |
-| `NUMBER_OF_SHARDS`  | Number of shards to run                                                      | `2`      |
-| `BOTS_PER_SHARD`    | Max number of bots per shard                                                 | `32`     |
-| `RESTART_INTERVAL`  | Time in **seconds** before the cluster restarts automatically                | `3600`   |
+## 📎 Additional Resources
 
-## 🔄 Updating FNLB
-
-To make sure you're running the latest version of FNLB, follow these steps:
-
-1. **Pull the latest changes** from the repository:
-
-```bash
-git pull origin main
-```
-
-2. **Reinstall dependencies** in case any were updated:
-
-```bash
-npm update fnlb
-```
-
-3. **(Optional)** If you're using Bun:
-
-```bash
-bun install
-```
-
-4. **Restart your FNLB cluster** to apply updates:
-
-```bash
-npm start
-# or
-bun start:bun
-```
-
-> ✅ Keeping FNLB up to date ensures you have the latest features, bug fixes, and performance improvements.
-
-
-© [FNLB](https://fnlb.net)
+- [FNLB Official Site](https://fnlb.net)
+- [FNLB Dashboard](https://app.fnlb.net)
+- [FNLB Documentation ](https://docs.fnlb.net)
