@@ -8,7 +8,7 @@ Easily self-host your own **FNLB** cluster using this minimal setup. FNLB is a p
 
 Before you begin, make sure you have the following installed and ready:
 
-- **Node.js** (version 18 or newer) – [Download Node.js](https://nodejs.org/)
+- **Node.js** (version 22 or newer) – [Download Node.js](https://nodejs.org/)
 - A valid **[FNLB API Token](https://app.fnlb.net/account)** – required to authenticate with FNLB services
 - *(Optional)* **[Bun](https://bun.sh)** – A fast JavaScript runtime that can be used as an alternative to Node.js
 
@@ -162,3 +162,4 @@ Once started, the script performs the following:
 - [FNLB Official Site](https://fnlb.net)
 - [FNLB Dashboard](https://app.fnlb.net)
 - [FNLB Documentation ](https://docs.fnlb.net)
+
