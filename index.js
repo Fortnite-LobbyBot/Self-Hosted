@@ -5,6 +5,15 @@ const fnlb = new FNLB({
 	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
 });
 
+const parseListEnv = (value) => {
+	if (value === undefined) return undefined;
+	const items = value
+		.split(',')
+		.map((v) => v.trim())
+		.filter((v) => v.length > 0);
+	return items.length > 0 ? items : undefined;
+};
+
 async function startFNLB() {
 	await fnlb.start({
 		apiToken: process.env.API_TOKEN,
@@ -14,7 +23,8 @@ async function startFNLB() {
 		botsPerShard: isNaN(parseInt(process.env.BOTS_PER_SHARD))
 			? 32
 			: parseInt(process.env.BOTS_PER_SHARD),
-		categories: process.env.CATEGORIES?.split(',').map((c) => c.trim())
+		categories: parseListEnv(process.env.CATEGORIES),
+		bots: parseListEnv(process.env.BOTS)
 	});
 }
 

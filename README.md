@@ -62,6 +62,7 @@ Edit the `.env` file with your actual values:
 ```ini
 API_TOKEN=your_token_here
 CATEGORIES=12345678,98765432
+BOTS=bot-id-1,bot-id-2
 NUMBER_OF_SHARDS=2
 BOTS_PER_SHARD=32
 RESTART_INTERVAL=3600
@@ -69,7 +70,8 @@ CLUSTER_NAME=Self Hosted Cluster
 ```
 
 > 💡 **API Token:** Obtain this from your [FNLB Account](https://app.fnlb.net/account) under “API Tokens”.  
-> 💡 **Category IDs:** Visit the [FNLB Bots Page](https://app.fnlb.net/bots), select a bot, and locate the **“Category ID”** in the **“About this bot”** section.
+> 💡 **Category IDs:** Visit the [FNLB Bots Page](https://app.fnlb.net/bots), select a bot, and locate the **“Category ID”** in the **“About this bot”** section.  
+> 💡 **Bot IDs:** Use `BOTS` instead of (or alongside) `CATEGORIES` to start specific bots by ID from the same **“About this bot”** section.
 
 ---
 
@@ -100,11 +102,16 @@ Below is a breakdown of each environment variable used in the setup:
 | Variable            | Description                                                                 | Default               |
 |---------------------|-----------------------------------------------------------------------------|-----------------------|
 | `API_TOKEN`         | Your personal FNLB API token                                                | *Required*            |
-| `CATEGORIES`        | Comma-separated list of bot category IDs                                    | *Required*            |
+| `CATEGORIES`        | Comma-separated list of bot category IDs                                    | —                     |
+| `BOTS`              | Comma-separated list of bot IDs (alternative to `CATEGORIES`)               | —                     |
 | `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`                   |
 | `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`                  |
 | `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`                |
 | `CLUSTER_NAME`      | The name of the cluster that will appear in the app                         | `Self Hosted Cluster` |
+
+> Provide `CATEGORIES`, `BOTS`, or both. At least one is recommended to control which bots start.
+> Omit `CATEGORIES` and `BOTS` to start from your full bot pool. Set either to narrow which bots are eligible.
+
 
 ---
 
@@ -152,7 +159,7 @@ Once started, the script performs the following:
 - Configures:
   - Number of **shards** (isolated bot processes)
   - Maximum **bots per shard**
-  - Allowed **category IDs**
+  - Allowed **category IDs** and/or specific **bot IDs**
 - Implements automatic restarts for resilience, using the configured time interval
 
 ---
