@@ -5,8 +5,3 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    volumes:
-      - fnlb-cache:/app/.fnlb
-
-volumes:
-  fnlb-cache:
