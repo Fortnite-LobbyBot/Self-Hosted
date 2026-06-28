@@ -1,0 +1,12 @@
+services:
+  fnlb:
+    image: ghcr.io/fortnite-lobbybot/self-hosted:latest
+    build: .
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - fnlb-cache:/app/.fnlb
+
+volumes:
+  fnlb-cache:
