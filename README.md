@@ -11,6 +11,7 @@ Before you begin, make sure you have the following installed and ready:
 - **Node.js** (version 22 or newer) – [Download Node.js](https://nodejs.org/)
 - A valid **[FNLB API Token](https://app.fnlb.net/account)** – required to authenticate with FNLB services
 - *(Optional)* **[Bun](https://bun.sh)** – A fast JavaScript runtime that can be used as an alternative to Node.js
+- *(Optional)* **[Docker](https://docs.docker.com/get-docker/)** – Run FNLB in a container without installing Node.js or Bun locally
 
 ---
 
@@ -141,11 +142,57 @@ Ensure you're always using the latest and most stable version of FNLB:
 
    ```bash
    npm start
-   # or
+   # or with Bun
    bun start:bun
+   # or with Docker
+   docker compose up -d --build
    ```
 
 > ✅ Regular updates provide access to new features, performance boosts, and essential bug fixes.
+
+---
+
+## 🐳 Docker
+
+Run FNLB in a container using the multi-stage `Dockerfile`.
+
+### Prerequisites
+
+- [Docker Engine](https://docs.docker.com/engine/install/) or [Docker Desktop](https://docs.docker.com/desktop/)
+- A configured `.env` file (see [Configure Environment Variables](#3-configure-environment-variables))
+
+### Pre-built image
+
+Official images are published to GitHub Container Registry on pushes to the `stable` branch:
+
+```bash
+docker pull ghcr.io/fortnite-lobbybot/self-hosted:latest
+docker run -d --name fnlb --env-file .env --restart unless-stopped ghcr.io/fortnite-lobbybot/self-hosted:latest
+```
+
+### Docker Compose
+
+A `docker-compose.yml` is included for a simpler workflow. From the project root:
+
+1. Create and configure your `.env` file (see above).
+2. Start the cluster in the background:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+View logs:
+
+```bash
+docker compose logs -f
+```
+
+Stop the cluster:
+
+```bash
+docker compose down
+```
 
 ---
 

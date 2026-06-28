@@ -1,6 +1,5 @@
-# Builder
 FROM docker.io/oven/bun:latest AS builder
-WORKDIR /build/
+WORKDIR /app
 
 ENV NODE_ENV=production
 
@@ -8,14 +7,15 @@ COPY bun.lock package.json ./
 
 RUN bun install --production --frozen-lockfile --ignore-scripts
 
-COPY . .
+COPY src ./src
 
-RUN bun run build:standalone
+RUN mkdir -p .fnlb && chown -R 65532:65532 /app
 
-# Runner
-FROM gcr.io/distroless/base-nossl-debian12:nonroot AS runner
+FROM docker.io/oven/bun:distroless
+WORKDIR /app
 
-COPY --from=builder /build/dist/selfhosted ./
+COPY --from=builder --chown=65532:65532 /app /app
 
+USER 65532:65532
 
-CMD ["./selfhosted"]
+CMD ["src/index.js"]

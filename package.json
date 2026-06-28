@@ -11,7 +11,6 @@
 	"scripts": {
 		"start": "node src/index.js",
 		"start:bun": "bun run src/index.js",
-		"build:standalone": "bun build --compile --target bun --format esm --minify --outfile ./dist/selfhosted ./src/index.js"
 	},
 	"dependencies": {
 		"fnlb": "latest",
