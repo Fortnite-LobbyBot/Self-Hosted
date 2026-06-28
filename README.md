@@ -62,7 +62,6 @@ Edit the `.env` file with your actual values:
 ```ini
 API_TOKEN=your_token_here
 CATEGORIES=12345678,98765432
-BOTS=bot-id-1,bot-id-2
 NUMBER_OF_SHARDS=2
 BOTS_PER_SHARD=32
 RESTART_INTERVAL=3600
@@ -111,7 +110,6 @@ Below is a breakdown of each environment variable used in the setup:
 
 > Provide `CATEGORIES`, `BOTS`, or both. At least one is recommended to control which bots start.
 > Omit `CATEGORIES` and `BOTS` to start from your full bot pool. Set either to narrow which bots are eligible.
-
 
 ---
 
@@ -168,5 +166,5 @@ Once started, the script performs the following:
 
 - [FNLB Official Site](https://fnlb.net)
 - [FNLB Dashboard](https://app.fnlb.net)
-- [FNLB Documentation ](https://docs.fnlb.net)
-
+- [FNLB Developer Documentation](https://developer-docs.fnlb.net)
+- [FNLB Developer Portal](https://developers.fnlb.net)

@@ -1,0 +1,20 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 0,
+  "workspaces": {
+    "": {
+      "name": "fnlb-selfhosted",
+      "dependencies": {
+        "dotenv": "^17.4.2",
+        "fnlb": "latest",
+      },
+    },
+  },
+  "packages": {
+    "@fnlb-project/shared": ["@fnlb-project/shared@1.5.142", "", {}, "sha512-OfIfM68n81jNkBW1bPbLwLCBo2gbsfNFw9uaGDDVgOh9UgFHCgWtGBqSYtaW9bvXiTzv9igcmfwGU9Z7PwYKFQ=="],
+
+    "dotenv": ["dotenv@17.4.2", "", {}, "sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw=="],
+
+    "fnlb": ["fnlb@1.1.18", "", { "dependencies": { "@fnlb-project/shared": "^1.5.142" } }, "sha512-o0obT6vIWMJ03zuT2L1rm9siVzR0DgYKSULDv1qiJLZMaLOVlb1I5pRM9qeOmYq82wqM7KSaLjCwgW1Bm+c2SA=="],
+  }
+}

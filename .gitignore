@@ -1,3 +1,5 @@
 .env
 .fnlb
 node_modules
+dist
+.vscode

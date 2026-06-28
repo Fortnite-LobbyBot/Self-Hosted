@@ -9,11 +9,12 @@
 	"description": "Easily run your own bot using FNLB, a powerful and scalable system for managing Fortnite bots.",
 	"license": "ISC",
 	"scripts": {
-		"start": "node index.js",
-		"start:bun": "bun run index.js"
+		"start": "node src/index.js",
+		"start:bun": "bun run src/index.js",
+		"build:standalone": "bun build --compile --target bun --format esm --minify --outfile ./dist/selfhosted ./src/index.js"
 	},
 	"dependencies": {
 		"fnlb": "latest",
-		"dotenv": "^17.2.3"
+		"dotenv": "^17.4.2"
 	}
 }

@@ -1,0 +1,69 @@
+name: 'CD -> Container'
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - stable
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
+permissions:
+    contents: read
+
+jobs:
+    build:
+        name: 'Build container image'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+            packages: write
+
+        env:
+            REGISTRY: ghcr.io
+            IMAGE_NAME: ${{ github.repository }}
+
+        steps:
+            - name: 'Checkout'
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  fetch-depth: 0
+
+            - name: 'Setup tags'
+              id: setup-tags
+              run: |
+                  TIMESTAMP="$(date +%Y.%m.%d)"
+                  SHA_SHORT="${GITHUB_SHA::7}"
+
+                  TAGS=()
+                  TAGS+=("latest")
+                  TAGS+=("${GITHUB_SHA}")
+                  TAGS+=("${TIMESTAMP}-${SHA_SHORT}")
+
+                  echo "build-tags=${TAGS[*]}" >> $GITHUB_OUTPUT
+
+            - name: 'Build image'
+              id: build-image
+              uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # master
+              with:
+                  archs: amd64
+                  containerfiles: Dockerfile
+                  image: ${{ env.IMAGE_NAME }}
+                  layers: true
+                  tags: ${{ steps.setup-tags.outputs.build-tags }}
+                  context: .
+
+            - name: 'Push to GHCR'
+              uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2.8
+              env:
+                  REGISTRY_USER: ${{ github.actor }}
+                  REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+              with:
+                  image: ${{ steps.build-image.outputs.image }}
+                  tags: ${{ steps.build-image.outputs.tags }}
+                  registry: ${{ env.REGISTRY }}
+                  username: ${{ env.REGISTRY_USER }}
+                  password: ${{ env.REGISTRY_PASSWORD }}
