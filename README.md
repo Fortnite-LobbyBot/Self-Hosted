@@ -71,7 +71,7 @@ CLUSTER_NAME=Self Hosted Cluster
 
 > 💡 **API Token:** Obtain this from your [FNLB Account](https://app.fnlb.net/account) under “API Tokens”.  
 > 💡 **Category IDs:** Visit the [FNLB Bots Page](https://app.fnlb.net/bots), select a bot, and locate the **“Category ID”** in the **“About this bot”** section.  
-> 💡 **Bot IDs:** Use `BOTS` instead of (or alongside) `CATEGORIES` to start specific bots by ID from the same **“About this bot”** section.
+> 💡 **Bot IDs:** Use `BOTS` alongside `CATEGORIES` to include specific bots in addition to entire categories. See [Bot and category selection](#-bot-and-category-selection) below.
 
 ---
 
@@ -103,14 +103,33 @@ Below is a breakdown of each environment variable used in the setup:
 |---------------------|-----------------------------------------------------------------------------|-----------------------|
 | `API_TOKEN`         | Your personal FNLB API token                                                | *Required*            |
 | `CATEGORIES`        | Comma-separated list of bot category IDs                                    | —                     |
-| `BOTS`              | Comma-separated list of bot IDs (alternative to `CATEGORIES`)               | —                     |
+| `BOTS`              | Comma-separated list of bot IDs to include alongside categories             | —                     |
 | `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`                   |
 | `BOTS_PER_SHARD`    | Maximum number of bots assigned to each shard                               | `32`                  |
 | `RESTART_INTERVAL`  | Cluster restart interval in seconds (for stability/maintenance)             | `3600`                |
 | `CLUSTER_NAME`      | The name of the cluster that will appear in the app                         | `Self Hosted Cluster` |
 
-> Provide `CATEGORIES`, `BOTS`, or both. At least one is recommended to control which bots start.
-> Omit `CATEGORIES` and `BOTS` to start from your full bot pool. Set either to narrow which bots are eligible.
+> Omit `CATEGORIES` and `BOTS` to start from your full bot pool. Set either or both to limit which bots are eligible.
+
+---
+
+## 🎯 Bot and Category Selection
+
+`CATEGORIES` and `BOTS` define which bots a shard can pick from. They work as an **include list**.
+
+- **Categories only** - bots in those categories, plus bots without category.
+- **Bots only** - only the listed bot IDs.
+- **Both** - bots from the listed categories **or** the listed bot IDs (union).
+- **Neither** - your full bot pool.
+
+Invalid category or bot IDs are ignored at startup.
+
+Example: start bots from two categories **and** two specific bots from elsewhere:
+
+```ini
+CATEGORIES=category-id-1,category-id-2
+BOTS=bot-id-1,bot-id-2
+```
 
 ---
 
