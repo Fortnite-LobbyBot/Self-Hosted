@@ -102,7 +102,7 @@ Below is a breakdown of each environment variable used in the setup:
 | Variable            | Description                                                                 | Default               |
 |---------------------|-----------------------------------------------------------------------------|-----------------------|
 | `API_TOKEN`         | Your personal FNLB API token                                                | *Required*            |
-| `RELEASE_CHANNEL`   | Release channel. `stable` is the default and highly recommended channel.    | `stable               |
+| `RELEASE_CHANNEL`   | Can be `beta` or `stable`. Stable is the default and recommended channel.   | `stable`              |
 | `CATEGORIES`        | Comma-separated list of bot category IDs                                    | —                     |
 | `BOTS`              | Comma-separated list of bot IDs to include alongside categories             | —                     |
 | `NUMBER_OF_SHARDS`  | Number of individual shards (instances) to spawn                            | `2`                   |
