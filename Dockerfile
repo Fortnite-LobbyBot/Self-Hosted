@@ -1,4 +1,4 @@
-FROM docker.io/oven/bun:latest AS builder
+FROM docker.io/oven/bun:1.4.4 AS builder
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -11,7 +11,7 @@ COPY src ./src
 
 RUN mkdir -p .fnlb && chown -R 65532:65532 /app
 
-FROM docker.io/oven/bun:distroless
+FROM docker.io/oven/bun:1.4.4-distroless
 WORKDIR /app
 
 COPY --from=builder --chown=65532:65532 /app /app
