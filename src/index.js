@@ -5,6 +5,8 @@ const fnlb = new FNLB({
 	clusterName: process.env.CLUSTER_NAME || 'Self Hosted Cluster'
 });
 
+const releaseChannel = process.env.RELEASE_CHANNEL === 'beta' ? 'beta' : 'stable';
+
 const parseListEnv = (value) => {
 	if (value === undefined) return undefined;
 	const items = value
@@ -17,6 +19,7 @@ const parseListEnv = (value) => {
 async function startFNLB() {
 	await fnlb.start({
 		apiToken: process.env.API_TOKEN,
+		channel: releaseChannel,
 		numberOfShards: isNaN(parseInt(process.env.NUMBER_OF_SHARDS))
 			? 2
 			: parseInt(process.env.NUMBER_OF_SHARDS),

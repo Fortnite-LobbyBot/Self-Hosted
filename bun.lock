@@ -15,6 +15,6 @@
 
     "dotenv": ["dotenv@17.4.2", "", {}, "sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw=="],
 
-    "fnlb": ["fnlb@1.1.18", "", { "dependencies": { "@fnlb-project/shared": "^1.5.142" } }, "sha512-o0obT6vIWMJ03zuT2L1rm9siVzR0DgYKSULDv1qiJLZMaLOVlb1I5pRM9qeOmYq82wqM7KSaLjCwgW1Bm+c2SA=="],
+    "fnlb": ["fnlb@1.1.19", "", { "dependencies": { "@fnlb-project/shared": "^1.5.142" } }, "sha512-IEpvZEH7YnOTD6JVptOlb0RZZ5S52HGdKWjuOeI+RZYQtrIr4a441KyBQHyS/N1BmhyNqpuYHKON4bGg0z+ItA=="],
   }
 }
