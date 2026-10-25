@@ -233,5 +233,5 @@ Once started, the script performs the following:
 
 - [FNLB Official Site](https://fnlb.net)
 - [FNLB Dashboard](https://app.fnlb.net)
-- [FNLB Developer Documentation](https://developer-docs.fnlb.net)
+- [FNLB Developer Documentation](https://developers.fnlb.net/docs)
 - [FNLB Developer Portal](https://developers.fnlb.net)
